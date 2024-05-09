@@ -1,10 +1,5 @@
 package multithreading;
 
-/**
- * @author gkabra
- * @since 250
- */
-
 public class ThreadRunner {
     public static void main(String[] args) {
         Thread t1 = new Thread(new Thread1());

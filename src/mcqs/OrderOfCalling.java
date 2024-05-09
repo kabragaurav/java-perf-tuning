@@ -1,9 +1,5 @@
 package mcqs;
 
-/**
- * @author gkabra
- * @since 250
- */
 
 public class OrderOfCalling {
 

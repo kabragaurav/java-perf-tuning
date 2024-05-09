@@ -3,11 +3,6 @@ package mcqs;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * @author gkabra
- * @since 250
- */
-
 public class OutOfMemoryError {
     public static void main(String[] args) {
         List<Memory> ls = new ArrayList<>();

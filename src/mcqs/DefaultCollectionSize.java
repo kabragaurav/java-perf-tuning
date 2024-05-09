@@ -2,11 +2,6 @@ package mcqs;
 
 import java.util.ArrayList;
 
-/**
- * @author gkabra
- * @since 250
- */
-
 public class DefaultCollectionSize {
     public static void main(String[] args) {
         ArrayList<Integer> ls = new ArrayList<>();

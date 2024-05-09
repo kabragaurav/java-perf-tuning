@@ -1,9 +1,5 @@
 package multithreading;
 
-/**
- * @author gkabra
- * @since 250
- */
 
 public class Thread1 implements Runnable {
     @Override

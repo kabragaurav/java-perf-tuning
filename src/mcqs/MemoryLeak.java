@@ -1,10 +1,5 @@
 package mcqs;
 
-/**
- * @author gkabra
- * @since 250
- */
-
 public class MemoryLeak {
     public static void main(String[] args) {
         new Animal();
