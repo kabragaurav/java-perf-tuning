@@ -9,6 +9,7 @@ This repo holds:
 
 * JMX : JMX (Java Management Extensions) is a technology used for monitoring and managing Java applications, facilitating tasks like performance monitoring, configuration management, and remote control through standardized interfaces and components.
 * RMI: RMI (Remote Method Invocation) is a Java API allowing communication between Java objects in different JVMs over a network, enabling distributed application development.
+* javaw: `w` stands for windowed. It is a tool used to run Java applications without showing a command prompt window. It's handy for applications with graphical interfaces or background services that don't need a visible console.
 
 =======
 
