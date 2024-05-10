@@ -116,6 +116,9 @@ Delegation happens to parent and if parent is not able to load, it delegates bac
 Otherwise `ClassNotFoundException` is thrown:
 <img src="./assets/images/cls_loading_mech.png">
 
+# Multithreading
+
+`ThreadLocal` in Java provides thread-local variables. These are variables that are only visible and accessible to the thread that sets them. Each thread has its own, independently initialized copy of the variable.
 
 # Tips
 1. Do not create object unless needed. And create object just before its usage
@@ -143,4 +146,6 @@ class Person {
    classes which are being used are loaded in the memory
 9. Use `StringBuilder` if possible. Also avoid wrapper and BigInteger (or similar) classes if possible
 10. Since recursion can create lot of local vars, do not use recursion, if loop is feasible
-11. Optimize SQL queries - use indexes, use conditional retrievals, try avoiding too many joins
+11. Optimize SQL queries - use indexes, use conditional retrievals, try avoiding too many joins, use joins over subqueries
+12. If multiple checks on String validations, instead of if-else, use regex
+13. JPA vs JDBC - JDBC is lower layer to manually interact with DB. JPA's implementation like Hibernate provides more OO way and caching, lazy loading and auto schema generation capabilities.

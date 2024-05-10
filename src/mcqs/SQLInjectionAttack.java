@@ -1,9 +1,5 @@
 package mcqs;
 
-/**
- * @author gkabra
- * @since 250
- */
 
 import java.sql.*;
 
