@@ -32,4 +32,5 @@ bin/
 .idea/modules.xml
 .idea/uiDesigner.xml
 .idea/vcs.xml
+.idea/sqldialects.xml
  java-perf-tune.iml

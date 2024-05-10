@@ -36,7 +36,8 @@ Compiled C++ programs produce standalone executables that do not rely on a separ
 Need to prevent `segmentation fault` and `memory leak` issues
 
 `System.gc() == Runtime.getRuntime().gc()`
-(Above calls induce full GC, which may suspend threads)
+(Above calls induce full GC, which may suspend threads, use `-XX:+DisableExplicitGC` and <a href="https://medium.com/@marko.ullgren/system-gc-considered-harmful-fe6c44078d2e">prefer never to call GC explicitly</a>)
+
 <img src="./assets/images/heap.png">
 
 #
@@ -137,3 +138,9 @@ class Person {
 ```
 5. Release variable when no longer needed by setting to `null`
 6. Use try-with-resource `AutoCloseable` interface resource management utility. So no need to close resources by making `finally` block
+7. Static fields are GC roots, which means they are never garbage-collected. So, never use mutable static fields — use only constants.
+8. Use helper clases - At times it is possible to have a class with lot of static variables and methods. Split these classes into smaller classes so that only those
+   classes which are being used are loaded in the memory
+9. Use `StringBuilder` if possible. Also avoid wrapper and BigInteger (or similar) classes if possible
+10. Since recursion can create lot of local vars, do not use recursion, if loop is feasible
+11. Optimize SQL queries - use indexes, use conditional retrievals, try avoiding too many joins
