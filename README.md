@@ -33,6 +33,10 @@ The JVM provides runtime services such as memory management, garbage collection,
 Compiled C++ programs produce standalone executables that do not rely on a separate runtime environment. They interact directly with the underlying operating system and hardware without an intermediary layer like a virtual machine.
 
 # GC
+Need to prevent `segmentation fault` and `memory leak` issues
+
+`System.gc() == Runtime.getRuntime().gc()`
+(Above calls induce full GC, which may suspend threads)
 <img src="./assets/images/heap.png">
 
 #
@@ -79,13 +83,37 @@ HotSpot JVM provides:
 1. Serial GC: does mark-sweep and compaction. Only one thread
 2. Parallel GC: Used to be JVM default till Java8. Uses multiple threads `-XX:ParallelGCThreads=<N>`, select `-XX:+UseParallelGC`. It uses Stop-the-World strategy
 3. Concurrent Mark and Sweep (CMS): Does not use stop the world strategy but stops threads, if changes happen in heap
-4. G1: Now default GC from Java9. Designed for multiprocessor, large memory systems. Divides heap in equal size spaces and firstly reclaims spaces which are mostly empty
+4. G1: Now default GC from Java9. Designed for multiprocessor, large memory systems. Divides heap in equal size spaces and firstly reclaims spaces which are mostly empty. It suspends threads only briefly
 
 ### How to make object ready for GC
 1. Create local var
 2. Nullify ref
 3. Reassign ref
 4. Create anonymous ref
+
+# Loading Activities
+### How class is loaded
+- Loading means reading from disk and storing binary data in method area
+- JVM stores info like fully-qualified name of class and immediate parent class, ctor, method, variable, modifiers infos, whether `.class` is class, interface or enum
+- For each loaded class, an object is created in heap <br/>
+  <img src="./assets/images/cls_load.png">
+- `ClassLoader` is abstract class. From Oracle documentation:
+    <img src="./assets/images/load_cls_byte_arr.png">
+
+### Linking
+- JVM checks sanity of bytecode (like formatting)
+- Replaces symbolic names (variable names) with actual memory refs
+- Static variables are initialized from Parent -> Child order
+
+### Types of loaders
+1. Bootstrap - Written in C/C++ (Native). Loads `rt.jar` classes like `java.lang`, `java.util`, `java.io` and `java.net` (rt = runtime)
+2. Extension - loads extensions (additional APIs, libraries, and tools that are not part of the standard Java distribution but are commonly used in Java development) from `ext` folder
+3. Application or System
+
+Parent to Child relationship: `Bootstrap -> Extension -> Application/System` <br/>
+Delegation happens to parent and if parent is not able to load, it delegates back to child (as shown below)
+Otherwise `ClassNotFoundException` is thrown:
+<img src="./assets/images/cls_loading_mech.png">
 
 
 # Tips
