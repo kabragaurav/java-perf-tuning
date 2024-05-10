@@ -67,3 +67,45 @@ Using CLI, pass as `java -Xms2560m MyCls` (sets the initial heap size to 2560 me
 ### Logs
 Can heapdump in VisualVM to store heap info at a moment.
 <img src="./assets/images/gc_logs.png">
+
+### How GC Works?
+- There is no class unloading mechanism. So a class once loads remains in method area. And so do static variables. But if we create our own class loader, once that is removed, loaded classes are GCed
+- JVM does not load class until needed. `import` does not mean loading, it is just for JVM to know location of class
+- 4 Types of GC roots: local vars, static vars, JNI refs and active Java threads
+- Once mark and sweep is done, compaction is done to remove fragments
+
+### Types of GC
+HotSpot JVM provides:
+1. Serial GC: does mark-sweep and compaction. Only one thread
+2. Parallel GC: Used to be JVM default till Java8. Uses multiple threads `-XX:ParallelGCThreads=<N>`, select `-XX:+UseParallelGC`. It uses Stop-the-World strategy
+3. Concurrent Mark and Sweep (CMS): Does not use stop the world strategy but stops threads, if changes happen in heap
+4. G1: Now default GC from Java9. Designed for multiprocessor, large memory systems. Divides heap in equal size spaces and firstly reclaims spaces which are mostly empty
+
+### How to make object ready for GC
+1. Create local var
+2. Nullify ref
+3. Reassign ref
+4. Create anonymous ref
+
+
+# Tips
+1. Do not create object unless needed. And create object just before its usage
+2. Make methods static which do not use instance data, so that they can be called as `Cls.method()` and no need to create obj of class (Object creation is heavy process, need to go up hierarchy to call all ctors)
+3. Use right GC for your app - can have stop-the-world event? Want to use multiprocessor?
+4. For one time use, create anonymous objects
+```
+public class AnonymousObjectExample {
+    public static void main(String[] args) {
+        // Creating an anonymous object of the Person class
+        new Person().introduce(); // Anonymous object calling the method directly
+    }
+}
+
+class Person {
+    public void introduce() {
+        System.out.println("Hi, I am Gaurav's anonymous person!");
+    }
+}
+```
+5. Release variable when no longer needed by setting to `null`
+6. Use try-with-resource `AutoCloseable` interface resource management utility. So no need to close resources by making `finally` block
