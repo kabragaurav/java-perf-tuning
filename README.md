@@ -1,4 +1,6 @@
 # Java Performance Tuning
+### Read this README as a webpage <a href="https://kabragaurav.github.io/java-perf-tuning/">here</a>
+
 This repo holds:
 - MCQs for Java deep dives
 - <a href="./src/multithreading/VISUAL_VM.md">Thread Profiling Using VirtualVM</a>
