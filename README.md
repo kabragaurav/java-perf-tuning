@@ -2,7 +2,7 @@
 
 This repo holds:
 - MCQs for Java deep dives
-- <a href="./src/multithreading/VISUAL_VM.md">Thread Profiling Using VirtualVM</a>
+- <a href="./src/multithreading/VISUAL_VM.md">Thread Profiling Using VisualVM</a>
   <img src="./assets/images/visual_vm_both_threads.png">
 - <a href="./assets/pdfs/JavaPerformanceTuning.pdf">GC and Heap PDF</a>
 
@@ -125,6 +125,7 @@ Otherwise `ClassNotFoundException` is thrown:
 2. Make methods static which do not use instance data, so that they can be called as `Cls.method()` and no need to create obj of class (Object creation is heavy process, need to go up hierarchy to call all ctors)
 3. Use right GC for your app - can have stop-the-world event? Want to use multiprocessor?
 4. For one time use, create anonymous objects
+   
 ```
 public class AnonymousObjectExample {
     public static void main(String[] args) {
@@ -139,6 +140,7 @@ class Person {
     }
 }
 ```
+
 5. Release variable when no longer needed by setting to `null`
 6. Use try-with-resource `AutoCloseable` interface resource management utility. So no need to close resources by making `finally` block
 7. Static fields are GC roots, which means they are never garbage-collected. So, never use mutable static fields — use only constants.
