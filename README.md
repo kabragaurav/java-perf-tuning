@@ -1,5 +1,4 @@
 # Java Performance Tuning
-### Read this README as a webpage <a href="https://kabragaurav.github.io/java-perf-tuning/">here</a>
 
 This repo holds:
 - MCQs for Java deep dives
@@ -20,7 +19,6 @@ This repo holds:
 
 <img src="./assets/images/jre.png">
 
-# 
 - Using `new` memory is allocated on Heap, but refs exist on Stack
 - String pool is part of Java heap
 - Stack stores intermediate results for methods
